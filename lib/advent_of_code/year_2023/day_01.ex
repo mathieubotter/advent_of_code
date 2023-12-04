@@ -2,20 +2,20 @@ defmodule AdventOfCode.Year2023.Day01 do
   @digits ~w(1 2 3 4 5 6 7 8 9)
 
   def part1(input) do
-    input
-    |> String.split("\n")
+    parse(input)
     |> Stream.map(&calibration_value/1)
     |> Stream.map(&String.to_integer/1)
     |> Enum.sum()
   end
 
   def part2(input) do
-    input
-    |> String.split("\n")
+    parse(input)
     |> Stream.map(&calibration_value(&1, true))
     |> Stream.map(&String.to_integer/1)
     |> Enum.sum()
   end
+
+  defp parse(input), do: String.split(input, "\n", trim: true)
 
   defp calibration_value(line),
     do: digit(line, false) <> digit(String.reverse(line), false)
