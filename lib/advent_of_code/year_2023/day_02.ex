@@ -21,9 +21,14 @@ defmodule AdventOfCode.Year2023.Day02 do
     end)
   end
 
-  defp parse(input), do: String.split(input, "\n", trim: true) |> parse_games()
-  defp parse_games(lines), do: Stream.map(lines, &String.split(&1, ":")) |> Stream.map(&game/1)
-  defp game(["Game " <> id, records]), do: {id, parse_colors(records)}
+  defp parse(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Stream.map(&String.split(&1, ":"))
+    |> Stream.map(&parse_game/1)
+  end
+
+  defp parse_game(["Game " <> id, records]), do: {id, parse_colors(records)}
   defp parse_colors(records), do: String.split(records, [",", ";"]) |> Stream.map(&color_value/1)
 
   defp color_value([value, color]), do: {String.to_atom(color), String.to_integer(value)}
