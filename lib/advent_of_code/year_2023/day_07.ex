@@ -36,8 +36,8 @@ defmodule AdventOfCode.Year2023.Day07 do
 
     rank =
       if with_joker,
-        do: evaluate_rank(hand),
-        else: evaluate_rank_with_joker(hand)
+        do: evaluate_rank_with_joker(hand),
+        else: evaluate_rank(hand)
 
     {hand, bid, rank}
   end
