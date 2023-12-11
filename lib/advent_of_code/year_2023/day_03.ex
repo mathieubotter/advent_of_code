@@ -50,10 +50,10 @@ defmodule AdventOfCode.Year2023.Day03 do
   defp do_parse("*" <> rest, x, y, acc),
     do: do_parse(rest, x + 1, y, [{:gear, {x, y}, "*"} | acc])
 
-  defp do_parse(<<s::binary-size(1), rest::binary>>, x, y, acc) when s in @symbols,
-    do: do_parse(rest, x + 1, y, [{:symbol, {x, y}, s} | acc])
+  defp do_parse(<<c::binary-1, rest::binary>>, x, y, acc) when c in @symbols,
+    do: do_parse(rest, x + 1, y, [{:symbol, {x, y}, c} | acc])
 
-  defp do_parse(<<c::utf8, rest::binary>>, x, y, acc) when c in ?0..?9 do
+  defp do_parse(<<c>> <> rest, x, y, acc) when c in ?0..?9 do
     {number, remaining} = do_parse_number(rest, [c])
 
     do_parse(remaining, x + String.length(number), y, [
@@ -64,10 +64,10 @@ defmodule AdventOfCode.Year2023.Day03 do
   defp do_parse_number(<<>>, acc),
     do: {to_string(Enum.reverse(acc)), ""}
 
-  defp do_parse_number(<<c::utf8, rest::binary>>, acc) when c in ?0..?9,
+  defp do_parse_number(<<c>> <> rest, acc) when c in ?0..?9,
     do: do_parse_number(rest, [c | acc])
 
-  defp do_parse_number(<<c::utf8, rest::binary>>, acc),
+  defp do_parse_number(<<c>> <> rest, acc),
     do: {to_string(Enum.reverse(acc)), <<c::utf8, rest::binary>>}
 
   defp adjacents(coordinates, parts) do

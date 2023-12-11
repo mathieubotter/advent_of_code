@@ -13,7 +13,10 @@ defmodule Mix.Tasks.Day do
     input = AdventOfCode.Input.get!(day, year)
 
     if Enum.member?(args, "-b") do
-      Benchee.run(%{part => fn -> solve(day, year, part, input) end})
+      Benchee.run(%{
+        part => fn -> solve(day, year, part, input) end
+        # Insert other function versions (fast, ...)
+      })
     else
       result = solve(day, year, part, input)
 

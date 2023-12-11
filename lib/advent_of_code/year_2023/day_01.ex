@@ -33,6 +33,6 @@ defmodule AdventOfCode.Year2023.Day01 do
       do: unquote(to_string(index))
   end
 
-  defp digit(<<d::binary-size(1), _rest::binary>>, _) when d in @digits, do: d
-  defp digit(<<_d::binary-size(1), rest::binary>>, spelled_out), do: digit(rest, spelled_out)
+  defp digit(<<d::binary-1, _rest::binary>>, _) when d in @digits, do: d
+  defp digit(<<_d::binary-1, rest::binary>>, spelled_out), do: digit(rest, spelled_out)
 end
