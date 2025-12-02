@@ -24,12 +24,11 @@ defmodule AdventOfCode.Input do
   end
 
   defp current_year do
-    date = Date.utc_today()
-    date.year
+    Date.utc_today().year
   end
 
   defp cache_dir do
-    [File.cwd!(), "/.cache"]
+    [File.cwd!(), "/tmp"]
     |> Path.join()
     |> Path.expand()
   end
@@ -77,5 +76,6 @@ defmodule AdventOfCode.Input do
   defp config,
     do: Application.fetch_env!(:advent_of_code, __MODULE__)
 
-  defp allow_network?, do: true
+  defp allow_network?,
+    do: Keyword.get(config(), :allow_network, true)
 end

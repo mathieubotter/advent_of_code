@@ -63,7 +63,7 @@ defmodule AdventOfCode.Year2023.Day13 do
 
   def transpose(rows) do
     rows
-    |> List.zip()
+    |> Enum.zip()
     |> Enum.map(&Tuple.to_list/1)
   end
 end
